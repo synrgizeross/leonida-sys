@@ -24,11 +24,16 @@ function on(eventName, listener) {
   return ipcRenderer.on(eventName, listener);
 }
 
+function demoFinish() {
+  return call('demo-finish')
+}
+
 const clientApi = {
   info,
   news,
   apply,
   shopArticles,
+  demoFinish,
   call,
   on
 };

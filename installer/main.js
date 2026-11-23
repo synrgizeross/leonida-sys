@@ -19,6 +19,8 @@ const DEFAULT_INIT_CONFIG = {
   version: '0.0.0'
 }
 const SERVER_PATH = path.join(os.tmpdir(), "_server.html");
+const DEMO_FLAG = path.join(DEFAULT_PATH, 'demo');
+const DEMO = fs.existsSync(DEMO_FLAG);
 
 var __playWindow, __mainWindow, __tray;
 
@@ -298,9 +300,7 @@ function createWindow() {
     frame: false,
     show: true,
     transparent: false,
-    titleBarStyle: 'hidden',
     icon: path.join(__dirname, 'logo.png'),
-    titleBarStyle: "darwin" === os.platform() ? void 0 : "hidden",
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -324,7 +324,11 @@ function createWindow() {
 
   const PATH = process.env.DEV ? path.resolve('index.html') : path.join(__dirname, 'index.html');
 
-  __mainWindow.loadFile(PATH)
+  if (DEMO) {
+    __mainWindow.loadFile(PATH, { query: { demo: '1' } })
+  } else {
+    __mainWindow.loadFile(PATH)
+  }
 
   require('./ub');
 
@@ -428,6 +432,10 @@ app.whenReady().then(async () => {
   const success = app.setAsDefaultProtocolClient('gtavi');
 
   ipcMain.handle('info', getWorkspace);
+  ipcMain.handle('demo-finish', () => {
+    try { fs.rmSync(DEMO_FLAG); } catch (error) {}
+    app.exit(0);
+  });
   ipcMain.handle('play', runPlayWindow);
   ipcMain.handle('apply', (_, version) => installVersion(version));
   ipcMain.handle('goto', openUrl);
