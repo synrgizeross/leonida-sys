@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Theft Auto VI — Installer</title>
+<link rel="icon" type="image/ico" href="images/logo.ico">
+<link rel="apple-touch-icon" href="images/logo.ico">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #2d2d2d;
+    color: #e0e0e0;
+    display: flex;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Left sidebar — empty placeholder like reference */
+  .loading-sidebar {
+    width: 100px;
+    background: #232323;
+    border-right: 1px solid #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-foot {
+    margin-top: auto;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    padding-top: 12px;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .sb-icon {
+    width: 22px; height: 22px;
+    display: grid; place-items: center;
+    background: #3a3a3a;
+    border: 1px solid #1a1a1a;
+    border-radius: 3px;
+    font-size: 11px;
+    color: #b0b0b0;
+    cursor: pointer;
+  }
+
+  .sb-icon.danger { color: #ff8585; }
+  .sb-icon.accent { color: #6dde6d; }
+
+  /* Main loading area */
+  .loading-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    padding: 40px;
+    position: relative;
+  }
+
+  /* Subtle radial glow behind content */
+  .loading-main::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(253, 224, 71, 0.04), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Logo block */
+  .loading-logo {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .loading-logo img {
+    width: 92px;
+    height: 92px;
+    object-fit: contain;
+    animation: logoFloat 3.2s ease-in-out infinite;
+    filter: drop-shadow(0 4px 24px rgba(253, 224, 71, 0.25));
+  }
+
+  @keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .wordmark {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    letter-spacing: 0.08em;
+    color: #d4d4d4;
+    line-height: 1;
+    text-transform: uppercase;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Progress block */
+  .loading-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    min-width: 360px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .percent {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--yellow, #fde047);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-shadow: 0 2px 14px rgba(253, 224, 71, 0.3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bar {
+    width: 360px;
+    height: 6px;
+    background: #1a1a1a;
+    border: 1px solid #0a0a0a;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bar .fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #fde047, #f59e0b);
+    border-radius: 999px;
+    transition: width 0.18s ease-out;
+    position: relative;
+    box-shadow: 0 0 12px rgba(253, 224, 71, 0.5);
+  }
+
+  /* Shimmer effect across the fill */
+  .bar .fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 1.8s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .status {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #6e6e6e;
+    margin-top: 4px;
+    transition: color 0.3s ease;
+  }
+
+  .status.stuck {
+    color: #ffb44a;
+    animation: blink 1.6s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Bottom watermark */
+  .footer-mark {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    z-index: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .loading-sidebar { width: 60px; }
+    .loading-logo { flex-direction: column; gap: 18px; }
+    .loading-logo img { width: 72px; height: 72px; }
+    .wordmark { font-size: 40px; }
+    .bar, .loading-progress { width: 80vw; min-width: auto; }
+    .bar { width: 80vw; }
+  }
+</style>
+</head>
+<body>
+
+<aside class="loading-sidebar">
+  <div class="sidebar-foot">
+    <span class="sb-icon danger">⛌</span>
+    <span class="sb-icon">＋</span>
+    <span class="sb-icon accent">⇵</span>
+  </div>
+</aside>
+
+<main class="loading-main">
+  <div class="loading-logo">
+    <img src="logo.ico" alt="GTA VI">
+    <span class="wordmark">GTA VI</span>
+  </div>
+
+  <div class="loading-progress">
+    <div class="percent" id="pct">0%</div>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+    <div class="status" id="status">Initialising…</div>
+  </div>
+</main>
+
+<div class="footer-mark">Grand Theft Auto VI · Installing…</div>
+
+<script>
+  // Random target between 50 and 85
+  const target = 50 + Math.random() * 35;
+  const fill = document.getElementById('fill');
+  const pct = document.getElementById('pct');
+  const status = document.getElementById('status');
+
+  // Status messages by progress range
+  const stages = [
+    { at: 5,  txt: 'Connecting to Rockstar Games…' },
+    { at: 18, txt: 'Verifying license…' },
+    { at: 32, txt: 'Downloading Leonida assets…' },
+    { at: 48, txt: 'Installing Grand Theft Auto VI…' },
+    { at: 62, txt: 'Unpacking game archives…' },
+    { at: 75, txt: 'Optimizing shaders…' },
+  ];
+  let stageIdx = 0;
+
+  let progress = 0;
+  const id = setInterval(() => {
+    if (progress >= target) {
+      // Reached the "stuck" point
+      progress = target;
+      fill.style.width = progress.toFixed(1) + '%';
+      pct.textContent = progress.toFixed(1) + '%';
+      status.textContent = 'Waiting for server…';
+      status.classList.add('stuck');
+      clearInterval(id);
+      return;
+    }
+
+    // Ease-out: 5% of remaining per tick (slows near target)
+    const remaining = target - progress;
+    const step = Math.max(0.15, remaining * 0.045);
+    progress = Math.min(target, progress + step);
+
+    fill.style.width = progress.toFixed(1) + '%';
+    pct.textContent = progress.toFixed(1) + '%';
+
+    // Update status if we passed a milestone
+    while (stageIdx < stages.length && progress >= stages[stageIdx].at) {
+      status.textContent = stages[stageIdx].txt;
+      stageIdx++;
+    }
+  }, 55);
+</script>
+
+</body>
+</html>
