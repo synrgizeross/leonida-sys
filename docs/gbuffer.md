@@ -1,6 +1,6 @@
 # Deferred G-buffer targets and declared output signatures (`PROC-146`)
 
-Reported by @Silliana in [#1891](https://github.com/ItsNotRexed/Leonida/issues/1891) for `PS_DeferredTextured` and
+Reported by @Silliana in [#1891](https://github.com/synrgizeross/leonida-sys/issues/1891) for `PS_DeferredTextured` and
 checked here across all **2,989 `*Deferred*` pixel shaders** (and all **1,703 six-target pixel shaders**) in the
 1.0.2.1 `shaders.rpf` corpus. Counts, target masks, numeric constants and format requirements only; no shader text or
 disassembly.

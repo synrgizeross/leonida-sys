@@ -10,7 +10,7 @@ counts only; no shader text.
 
 ## Bloom and exposure
 
-Reported by @Silliana in [#3235](https://github.com/ItsNotRexed/Leonida/issues/3235). The observations below were
+Reported by @Silliana in [#3235](https://github.com/synrgizeross/leonida-sys/issues/3235). The observations below were
 checked against the local disassembly. Offsets are bytes into the constant buffer read by the named shader.
 
 ### A black bloom chain (`PS_DownSampleBloomFilterKaris`)
@@ -42,7 +42,7 @@ When inspecting the upsample in isolation, check in the pipeline state how its o
 
 ## Studio-shot lighting (`PS_STUDIOSHOT_PBR_MATERIAL_STANDARD_LIGHTING`)
 
-Reported by @Silliana in [#1892](https://github.com/ItsNotRexed/Leonida/issues/1892). The corpus has one program
+Reported by @Silliana in [#1892](https://github.com/synrgizeross/leonida-sys/issues/1892). The corpus has one program
 with this name. It shades with up to eight lights, read from a buffer of 512-byte light records. Colour and
 intensity come from a separate table of light profiles.
 
@@ -97,7 +97,7 @@ dword and the buffer's bounds first.
 
 | Type | Low half | High half | Source |
 |---|---|---|---|
-| 0 | Sphere radius: clamped against the reflection ray to pick the closest point on the light. Brightness grows with radius², since intensity is radiance. | No effect. | Tested by @Silliana [on the pull request](https://github.com/ItsNotRexed/Leonida/pull/3157): radius 60 → 5 dimmed the light about 134× (radius² predicts 144×). |
+| 0 | Sphere radius: clamped against the reflection ray to pick the closest point on the light. Brightness grows with radius², since intensity is radiance. | No effect. | Tested by @Silliana [on the pull request](https://github.com/synrgizeross/leonida-sys/pull/3157): radius 60 → 5 dimmed the light about 134× (radius² predicts 144×). |
 | not decoded | Half-size along one axis of a rectangle. | Half-size along the other axis. | Shader: the light's position is moved by ± each half along its axis, and points are clamped to those bounds. |
 | not decoded | — | A length along the light's axis (clamped to ± half of it), also squared and compared against a distance. Probably a tube light's length (@Silliana's hypothesis, not tested). | Shader. |
 
@@ -129,7 +129,7 @@ The light is skipped only through a profile intensity of 0 or less.
 
 ## ACES LUT bakes (`postfx_aces`)
 
-Reported by @Silliana in [#1896](https://github.com/ItsNotRexed/Leonida/issues/1896). The corpus has ten bake
+Reported by @Silliana in [#1896](https://github.com/synrgizeross/leonida-sys/issues/1896). The corpus has ten bake
 programs: `CS_BakeACESLUT`, `CS_BakeACESWithGamutCompressLUT`, and the `TonemapOnly` versions of both, each with a
 choice of shaper (Linear, Log, PQ or QuasiLog; the `TonemapOnly` bakes exist only with QuasiLog). Each one writes
 an RGBA 3D LUT through a storage image (`image_store`, 3D). In the corpus the program names have lost the `A` of
@@ -202,7 +202,7 @@ one that also uses luminance; it doesn't decide whether the curve applies.
 
 ## Sky passes (`sky_scattering`, `scattering_transmittance_system`)
 
-Reported by @Silliana in [#1897](https://github.com/ItsNotRexed/Leonida/issues/1897). This is a physically based
+Reported by @Silliana in [#1897](https://github.com/synrgizeross/leonida-sys/issues/1897). This is a physically based
 atmosphere: two lookup tables are built at runtime and the sky passes sample them. Neither table is a texture on
 disk.
 
@@ -225,7 +225,7 @@ tables are built, it reads whatever is in them, and the black or noisy sky looks
 
 `CS_Transmittance` turns its integer texel index into table coordinates as x × 1/256 and y × 1/64, with no +0.5,
 so each texel holds the value at its corner, not its centre (pointed out by @Silliana in
-[#3217](https://github.com/ItsNotRexed/Leonida/pull/3217#issuecomment-7084678180)). A reference table built at texel
+[#3217](https://github.com/synrgizeross/leonida-sys/pull/3217#issuecomment-7084678180)). A reference table built at texel
 centres differs from it slightly, most visibly near the ground. That difference is expected and isn't a translator bug.
 
 ### The dword at +0xD0: output format, not an enable
@@ -255,7 +255,7 @@ binds an `R32_UINT` storage view ([`d3d12_vulkan.md`](d3d12_vulkan.md), from #13
 
 ### The shared atmosphere constant buffer
 
-Reported by @Silliana in [#3990](https://github.com/ItsNotRexed/Leonida/issues/3990): the four passes read one
+Reported by @Silliana in [#3990](https://github.com/synrgizeross/leonida-sys/issues/3990): the four passes read one
 atmosphere struct, each through its own buffer descriptor fetched from the resource table. Confirmed in the
 disassembly of the 1.0.2.1 package (llvm-mc 23.1.5, gfx1013): the 26,503-program corpus has exactly one program for
 each of the four names, and each reads the offsets below through a single descriptor. The three `sky_scattering`

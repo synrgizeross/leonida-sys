@@ -65,7 +65,7 @@ Il progetto è in fase iniziale: **il gioco non si avvia ancora**.
 2. Scarica il progetto **con il suo sottomodulo**:
 
    ```powershell
-   git clone --recursive https://github.com/ItsNotRexed/Leonida
+   git clone --recursive https://github.com/synrgizeross/leonida-sys
    ```
 
    Il «Download ZIP» di GitHub non include `third_party/rpf9-explorer`. La build lo scarica da sola se `git` è
@@ -151,6 +151,6 @@ avvio non devono essere compilati. La traduzione degli shader è il passaggio pi
 risultati (conteggi, esito dei test, classi di errore).
 
 La [guida ai test GPU](../../testing.md) spiega come eseguirli senza i file del gioco. I risultati dei test GPU
-vanno pubblicati nell'[issue #166](https://github.com/ItsNotRexed/Leonida/issues/166).
+vanno pubblicati nell'[issue #166](https://github.com/synrgizeross/leonida-sys/issues/166).
 
-[coord]: https://github.com/ItsNotRexed/Leonida/issues?q=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22Coordinating%20who%20works%20on%20what%22
+[coord]: https://github.com/synrgizeross/leonida-sys/issues?q=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22Coordinating%20who%20works%20on%20what%22

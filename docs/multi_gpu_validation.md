@@ -58,8 +58,8 @@ stop and report the blocker; do not substitute llvmpipe. The ICD file on this bo
 These are aggregate results from this box; the full per-command counts are in the linked #166 entries, not in this
 page. No game-derived data was used for any of them.
 
-- Single-card RDNA1/RADV baseline suite and TEST-71 fuzz matrix: [#166 entry](https://github.com/ItsNotRexed/Leonida/issues/166#issuecomment-7078373329).
-- Eight-card fallback matrix and extended fuzz campaign (seeds 4–11, 200 programs, both waves): [#166 entry](https://github.com/ItsNotRexed/Leonida/issues/166#issuecomment-7079130604).
+- Single-card RDNA1/RADV baseline suite and TEST-71 fuzz matrix: [#166 entry](https://github.com/synrgizeross/leonida-sys/issues/166#issuecomment-7078373329).
+- Eight-card fallback matrix and extended fuzz campaign (seeds 4–11, 200 programs, both waves): [#166 entry](https://github.com/synrgizeross/leonida-sys/issues/166#issuecomment-7079130604).
 - Native MUBUF `OOB_SELECT` measurement on gfx1011 with `tools/hw_oracle` and `tools/buffer_bounds_probe.py`: 12 cases
   at wave32 and wave64 (24 groups), all following the measured RDNA2/GFX11 column, 8 disagreements with Mesa's
   GFX10 column, 0 wave32/wave64 differences (SHADER-341; results in [buffer_bounds.md](buffer_bounds.md)).

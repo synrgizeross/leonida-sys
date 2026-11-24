@@ -66,7 +66,7 @@ invariant below was measured on that full population; the field names describe s
 `p`, `z`, `s`, `t` and the trailer stays a labelled hypothesis.
 
 `0x5a` — `{u32 12345678; N × 20-byte entries; f32 trailer}` (`(size − 8) % 20 == 0` always). The framing is
-@kotorvr's ([finding](https://github.com/ItsNotRexed/Leonida/issues/3232#issuecomment-7084750136)), recounted
+@kotorvr's ([finding](https://github.com/synrgizeross/leonida-sys/issues/3232#issuecomment-7084750136)), recounted
 for ASSET-256; read 4 bytes later, as before, each entry paired one entry's fields with the next one's
 position, and the trailer became the last "counter":
 

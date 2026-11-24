@@ -64,7 +64,7 @@ o estágio parecer concluído com zero shaders, e um link simbólico em `disasm`
 1. Instale os pré-requisitos acima.
 2. Clone o repositório **com o submódulo**:
    ```powershell
-   git clone --recursive https://github.com/ItsNotRexed/Leonida
+   git clone --recursive https://github.com/synrgizeross/leonida-sys
    ```
 3. Abra a pasta `Leonida` e dê duplo clique em **`Build.bat`**.
 
@@ -168,6 +168,6 @@ da instalação. No Windows, `--runtime-build` também permite reutilizar um bui
    isso no PR, conforme [`AGENTS.md`](../../../AGENTS.md).
 
 O [guia de testes em GPU](../../testing.md) mostra como executar os testes sem arquivos do jogo.
-Publique os resultados de GPU na [issue #166](https://github.com/ItsNotRexed/Leonida/issues/166).
+Publique os resultados de GPU na [issue #166](https://github.com/synrgizeross/leonida-sys/issues/166).
 
-[coord]: https://github.com/ItsNotRexed/Leonida/issues?q=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22Coordinating%20who%20works%20on%20what%22
+[coord]: https://github.com/synrgizeross/leonida-sys/issues?q=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22Coordinating%20who%20works%20on%20what%22

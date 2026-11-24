@@ -7,7 +7,7 @@ rest of SDL's controller database. On a DualSense the impulse-trigger rumble bec
 the lightbar colour can be set.
 
 Without the shim the loader would bind `GameInputCreate` to the host's `GameInput.dll` if there is one
-([#279](https://github.com/ItsNotRexed/Leonida/pull/279)). That works for Xbox pads only, and gives no DualSense
+([#279](https://github.com/synrgizeross/leonida-sys/pull/279)). That works for Xbox pads only, and gives no DualSense
 features. That path is tested without the game: `gameinput_host_test` (ctest `gameinput_host`) maps a synthetic DLL
 built against the SDK's `gameinput.lib` and checks that its `GameInput.dll` import binds to the host's copy, that
 `GameInputCreate` and `GetCurrentTimestamp` work from mapped code, and that `GetCurrentReading` answers; with a pad

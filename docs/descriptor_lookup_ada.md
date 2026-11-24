@@ -1,6 +1,6 @@
 # Descriptor lookup cost on NVIDIA RTX 4070 SUPER (Ada)
 
-Divergent misses showed the largest change with table size. On the GPU-only memory type, one million logical lane lookups took 150 µs at 1,000 live descriptors, 657 µs at 10,000 and 998 µs at 100,000. Divergent texture hits took 39.7, 75.0 and 119.0 µs. The ReBAR type (device-local and host-visible) stayed within 0.5% of GPU-only in every cell. Host-visible memory outside VRAM was within 8% of them at 1,000 entries, and at 100,000 it was 2.5× slower for divergent misses and 6.0× slower for uniform texture hits. These are synthetic compute results from one GeForce RTX 4070 SUPER on Windows 11 with NVIDIA driver 621.01. The benchmark ran unchanged at `dcd8ecf`. [D3D-56 benchmark PR #639](https://github.com/ItsNotRexed/Leonida/pull/639) · [Measured revision](https://github.com/ItsNotRexed/Leonida/commit/dcd8ecf10b138566d567020562b7afd853a89024)
+Divergent misses showed the largest change with table size. On the GPU-only memory type, one million logical lane lookups took 150 µs at 1,000 live descriptors, 657 µs at 10,000 and 998 µs at 100,000. Divergent texture hits took 39.7, 75.0 and 119.0 µs. The ReBAR type (device-local and host-visible) stayed within 0.5% of GPU-only in every cell. Host-visible memory outside VRAM was within 8% of them at 1,000 entries, and at 100,000 it was 2.5× slower for divergent misses and 6.0× slower for uniform texture hits. These are synthetic compute results from one GeForce RTX 4070 SUPER on Windows 11 with NVIDIA driver 621.01. The benchmark ran unchanged at `dcd8ecf`. [D3D-56 benchmark PR #639](https://github.com/synrgizeross/leonida-sys/pull/639) · [Measured revision](https://github.com/synrgizeross/leonida-sys/commit/dcd8ecf10b138566d567020562b7afd853a89024)
 
 ## Measurements
 
@@ -39,7 +39,7 @@ Unlike the [M3 Max run](descriptor_lookup_apple.md), this run kept the benchmark
 From a Leonida checkout on Windows, with Visual Studio 2022 (C++ desktop workload, C++ CMake tools) and the Vulkan SDK installed:
 
 ```powershell
-git fetch https://github.com/ItsNotRexed/Leonida.git dcd8ecf10b138566d567020562b7afd853a89024
+git fetch https://github.com/synrgizeross/leonida-sys.git dcd8ecf10b138566d567020562b7afd853a89024
 git worktree add --detach ..\leonida-ada FETCH_HEAD
 cd ..\leonida-ada
 powershell -ExecutionPolicy Bypass -File scripts\build_runtime.ps1

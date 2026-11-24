@@ -11,7 +11,7 @@ dropped valid models in three validation paths, all in `third_party/rpf9-explore
 
 ## Upstream status
 
-[Leonida issue #29](https://github.com/ItsNotRexed/Leonida/issues/29) tracks this work. The decoder
+[Leonida issue #29](https://github.com/synrgizeross/leonida-sys/issues/29) tracks this work. The decoder
 fix in [rpf9-explorer PR #1](https://github.com/breadbbbb/rpf9-explorer/pull/1) is merged, and
 `third_party/rpf9-explorer` is now pinned at upstream `e293917` (was `917e9b9`, originally
 `48557ea`). Commits up to `917e9b9` added the `packs.rpf` drawable-dictionary roots (one drawable

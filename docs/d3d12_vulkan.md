@@ -997,11 +997,11 @@ the game's present entry point (`PresentX`; the DXGI factory/swapchain and the p
     - Ryzen 7 9800X3D iGPU (RDNA2, gfx1036), Windows driver 32.0.21045.5002: COMPUTE only, sizes 32..64; RX 9070 XT
       (RDNA4, gfx1201), Windows driver 32.0.31041.1004: FRAGMENT | COMPUTE | TASK | MESH, sizes 32..64
       (@AC-Storm-YT, `vulkaninfoSDK` from Vulkan SDK 1.4.363.1,
-      [#313](https://github.com/ItsNotRexed/Leonida/issues/313#issuecomment-7086133354)). The same two lists on
+      [#313](https://github.com/synrgizeross/leonida-sys/issues/313#issuecomment-7086133354)). The same two lists on
       AMD 26.11.2 (Windows drivers 32.0.21045.29003 and 32.0.32029.2010), where `ps_bitmask_perm` also shows the
       live fragment width: the gfx1036 iGPU gets the RX 6800's split (2,048 of 4,096 pixels read lane 32), the
       RX 9070 XT is exact on all 4,096 (@AC-Storm-YT,
-      [#3982](https://github.com/ItsNotRexed/Leonida/pull/3982#issuecomment-7088523396) and #4225).
+      [#3982](https://github.com/synrgizeross/leonida-sys/pull/3982#issuecomment-7088523396) and #4225).
 
     Current Mesa RADV on GFX10+ lists COMPUTE | FRAGMENT | task/mesh (Mesa main at 152b9cde,
     `src/amd/vulkan/radv_physical_device.c`, `requiredSubgroupSizeStages`; older Mesa reported compute only), so
@@ -1653,7 +1653,7 @@ The layer's descriptor model:
   `d3d12_descriptor` accepts either rule for a fractional clamp (all texels of a view following the float or the
   floored minimum), and prints which one the driver used.
   See [Vulkan image-level selection](https://docs.vulkan.org/spec/latest/chapters/textures.html#textures-image-level-selection)
-  and the [Intel readbacks](https://github.com/ItsNotRexed/Leonida/pull/1015#issuecomment-7075135647).
+  and the [Intel readbacks](https://github.com/synrgizeross/leonida-sys/pull/1015#issuecomment-7075135647).
   If the logical device lacks the feature, the runtime logs the unsupported view
   and its descriptor resolves to the fallback. A clamp at or below the first mip needs no extension. Above the
   last mip, the view retains its dimensions and maps sampled channels to zero while preserving constant channels.
@@ -2331,7 +2331,7 @@ The trace will enumerate them.
     | 256x256x64 RGBA8 volume | 32x32x16 | 3 | 4 |
 
     An RDNA2 GPU (the Ryzen 7 9800X3D's, driver 32.0.21045.5002) gives the same splits as the RDNA4 one
-    ([#374](https://github.com/ItsNotRexed/Leonida/issues/374#issuecomment-7071869388)). With 30 more layouts that
+    ([#374](https://github.com/synrgizeross/leonida-sys/issues/374#issuecomment-7071869388)). With 30 more layouts that
     probe the edges (a mip exactly at or just past half a tile, thin and tall textures, non-square 2D and volume
     tiles), the rule that fits all 47 on both GPUs is: **a mip stays standard while it is wider than half the tile or
     taller than the tile; depth does not count**. An earlier "every axis at most half the tile's largest side" fitted
@@ -3502,7 +3502,7 @@ Three consequences for the runtime and table layout (additional GPU measurements
 2. **`BindlessSet::create()` currently allocates PCIe `HOST_VISIBLE | HOST_COHERENT` system memory (`runtime/src/vulkan_bindless.h`):** once working sets exceed cache at 10k–100k entries, `host_visible` slows `uniform_tsharp_hit` by **16.5x–35.5x**, divergent T# hits by **210x–269x**, and 8-probe misses by **425x–879x** (`181,717 us / 1M` at 10k, `205,561` at 100k). `host_device_local` (ReBAR `DEVICE_LOCAL | HOST_VISIBLE | HOST_COHERENT`) matches `device_local` within **1.4%** on every row here (largest delta 10k `divergent_miss`, `+1.4%`). Staging binding 2 to `DEVICE_LOCAL` (or preferring `DEVICE_LOCAL | HOST_VISIBLE` when small) avoids this cliff without touching the shader contract.
 3. **`bc8e604`'s bounded slot relocation keeps the table dense:** 100k settles at `524,288` slots (`19.07%` load, `20.00 MiB`, `max_probes=8`) instead of doubling to `2,097,152` on a 9-probe collision, so the large-table cost is bounded by the 8-probe window; the dominant divergent cost is the 8-probe miss (`483 us / 1M` at 100k).
 
-Raw CSV rows (297, 9 processes): [D3D-56 RTX 5080 report](https://github.com/ItsNotRexed/Leonida/issues/313#issuecomment-7084711283).
+Raw CSV rows (297, 9 processes): [D3D-56 RTX 5080 report](https://github.com/synrgizeross/leonida-sys/issues/313#issuecomment-7084711283).
 
 **Measured (D3D-56, AMD RDNA3).** The same benchmark and 64-bit timestamps on an AMD Radeon RX 7900 XTX (discrete, `0x1002:0x744c`, subgroup 64, driver `AMD proprietary 26.10.1 (LLPC)`, Vulkan 1.4.359), Windows 11 build 26200, revision `2aed144`. Dispatches, iterations and reps match the NVIDIA run above, but the table code does not: this revision includes `bc8e604`'s bounded slot relocation, so at 100k it settles at `524,288` slots (`20.00 MiB`, `19.07%` load, `max_probes=8`), the same geometry as the refreshed RTX 5080 table above. The two tables now describe the same `DescriptorTable` code and their 100k rows are comparable; the remaining caveat is subgroup size (AMD `64` vs NVIDIA `32`).
 
@@ -3520,9 +3520,9 @@ On this GPU:
 1. **`device_local` is stable and cheap at every size.** Wave-uniform sweeps run `4.9–7.6 us / 1M` (the 100k `uniform_tsharp_hit` is `7.618`), divergent lookups `14.1–54.9 us / 1M`, and the 8-probe miss `50.5–290.3 us / 1M`. Repeating the 10k measurement keeps `divergent_miss` at `141–143 us / 1M` net, so this column is not noise.
 2. **`host_visible` falls off a cliff at 100k, and is unreliable below it.** At 100k it is `5.0x–6.3x` slower than `device_local` on wave-uniform sweeps, `41x–65x` on divergent hits and pairs, and `111x` on 8-probe misses. At 10k the same rows varied by up to 6x between runs (`divergent_miss` net `147–845 us / 1M` over five runs), so the 10k host row above is one representative run; the uniform rows moved much less (`6.1–8.7 us / 1M`). The conclusion does not change: `device_local` is stable, `host_visible` is not.
 3. **`host_device_local` (ReBAR) is a safe fallback on AMD.** It is within 1% of `device_local` at 100k and within 2% at 10k; at 1k it is within 1.5% on the divergent and miss rows, `uniform_pair_ts` is 6% faster (`5.36` vs `5.71 us / 1M`) and `uniform_tsharp_hit` is 41% slower (`8.78` vs `6.22 us / 1M`). The `DEVICE_LOCAL | HOST_VISIBLE` allocation succeeds and runs here; it is not guaranteed on every Windows driver.
-4. **At the shared `524,288`/8-probe geometry, the 100k rows are comparable across the tables.** The RX 7900 XTX `divergent_miss` (`290 us / 1M`) is below the refreshed RTX 5080 (`483`), with the RX 9070 XT (RDNA4) between at `422` ([#313](https://github.com/ItsNotRexed/Leonida/issues/313)); the RX 7900 XTX is also faster on 100k divergent T# hits (`54` vs `72`) but slower on wave-uniform sweeps (`7.6` vs `6.0 us / 1M`). The subgroup size differs (AMD `64`, NVIDIA `32`), so this is a device-plus-subgroup comparison, not a pure microarchitecture one.
+4. **At the shared `524,288`/8-probe geometry, the 100k rows are comparable across the tables.** The RX 7900 XTX `divergent_miss` (`290 us / 1M`) is below the refreshed RTX 5080 (`483`), with the RX 9070 XT (RDNA4) between at `422` ([#313](https://github.com/synrgizeross/leonida-sys/issues/313)); the RX 7900 XTX is also faster on 100k divergent T# hits (`54` vs `72`) but slower on wave-uniform sweeps (`7.6` vs `6.0 us / 1M`). The subgroup size differs (AMD `64`, NVIDIA `32`), so this is a device-plus-subgroup comparison, not a pure microarchitecture one.
 
-Raw CSV rows: [D3D-56 report](https://github.com/ItsNotRexed/Leonida/issues/313#issuecomment-7074181793), addendum with the repeatability runs: [same issue](https://github.com/ItsNotRexed/Leonida/issues/313#issuecomment-7074220711).
+Raw CSV rows: [D3D-56 report](https://github.com/synrgizeross/leonida-sys/issues/313#issuecomment-7074181793), addendum with the repeatability runs: [same issue](https://github.com/synrgizeross/leonida-sys/issues/313#issuecomment-7074220711).
 
 **Measured (D3D-56, Intel integrated + RTX 5070 Ti Laptop).** These synthetic runs use `vk_descriptor_bench` from revision `f85582e`, Windows 11 Pro Insider Preview `10.0.29704`, MSVC 19.51, Vulkan SDK 1.4.363.0, and the exact `4096 x 64` invocations x `64` iterations (`16.78M` single / `33.55M` T#+S# pair lookups, median of 25 reps). NVIDIA runs used `--sizes 1000,1000,10000,100000 --warmup 200`; the Intel run additionally duplicated 100k (`--sizes 1000,1000,10000,100000,100000 --warmup 200`). The first 1k block is excluded because its `baseline_uniform` timing differed from the duplicate (Intel device-local: `0.771 ms` vs `0.594 ms`; NVIDIA device-local: `0.0555 ms` vs `0.0765 ms`). For Intel 100k, the second block is retained after the duplicate confirmed stable timing per allocation. Retained rows were not auto-scaled. Intel's device-local and host-visible placements ran together on the integrated GPU. NVIDIA device-local and ReBAR were measured in separate processes. The RTX 5070 Ti Laptop is `0x10de:0x2f58` (driver `621.01`, Vulkan `1.4.357`); Intel Graphics is `0x8086:0x7d67` (driver `32.0.101.8132`, Vulkan `1.4.325`).
 
@@ -3547,7 +3547,7 @@ On these devices:
 2. **NVIDIA ReBAR is close to device-local for uniform sweeps at 1k–10k and at 100k T#+S# pairs.** The 100k divergent and miss cases differ by workload (ReBAR is not uniformly faster or slower), so this run does not support a blanket placement ranking.
 3. **The NVIDIA host-visible run is omitted.** A separate full run returned `vkWaitForFences -> -4` while measuring the 10k host-visible cases; those partial timings are not reported. A safer capped profile is needed before drawing conclusions about PCIe system-memory lookup on this laptop.
 
-The run is synthetic and contains no game data. Raw retained rows and the corrected methodology are recorded in [the D3D-56 report on issue #313](https://github.com/ItsNotRexed/Leonida/issues/313#issuecomment-7078191651).
+The run is synthetic and contains no game data. Raw retained rows and the corrected methodology are recorded in [the D3D-56 report on issue #313](https://github.com/synrgizeross/leonida-sys/issues/313#issuecomment-7078191651).
 
 ### 5.2 Per-stage code base
 

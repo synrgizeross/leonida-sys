@@ -26,7 +26,7 @@ above, `MeshShaders[0]` selects material slot 0, the only slot. Looking up its `
 native shader database yields one effect with one technique and four compute-only passes. The VS and PS
 in the table are the fixture's chosen pair. The model's use during gameplay remains unverified.
 See the [effect lookup tool](../tools/sgd5_effects.py) and the
-[Windows reproduction of the UV draw](https://github.com/ItsNotRexed/Leonida/pull/2893#issuecomment-7084947193).
+[Windows reproduction of the UV draw](https://github.com/synrgizeross/leonida-sys/pull/2893#issuecomment-7084947193).
 
 Both disassemble with no invalid word, translate, and pass `spirv-val`; `tools/shader_link_check.py check` reports
 the pair compatible. At 128×128 the draw covers **12,804 of 16,384 pixels (0.781)** and the centre pixel is

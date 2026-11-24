@@ -402,8 +402,8 @@ class Scrub(unittest.TestCase):
                     self.assertEqual(pd.scrub(f"Error: {alternate} line 3"), "Error: tools/text_tables.py line 3")
 
     def test_urls_and_relative_paths_stay(self):
-        self.assertEqual(pd.scrub("see https://github.com/ItsNotRexed/Leonida/issues/1"),
-                         "see https://github.com/ItsNotRexed/Leonida/issues/1")
+        self.assertEqual(pd.scrub("see https://github.com/synrgizeross/leonida-sys/issues/1"),
+                         "see https://github.com/synrgizeross/leonida-sys/issues/1")
         self.assertEqual(pd.scrub("tests/test_x.py failed"), "tests/test_x.py failed")
 
 

@@ -539,7 +539,7 @@ jobs:
       - name: Runtime tests on MoltenVK
         shell: bash
         env:
-          # vk_overlapping_occlusion: since #2100 (D3D-252), https://github.com/ItsNotRexed/Leonida/issues/3796#issuecomment-7086691314
+          # vk_overlapping_occlusion: since #2100 (D3D-252), https://github.com/synrgizeross/leonida-sys/issues/3796#issuecomment-7086691314
           EXPECTED_FAILURES: vk_overlapping_occlusion
         run: |
           set +e
@@ -554,7 +554,7 @@ jobs:
         shell: bash
         env:
           # ps_ssharp: #1845 (the S#'s LOD bias, which a Metal sampler can't take). The others are tests newer than the
-          # job, wrong on MoltenVK: https://github.com/ItsNotRexed/Leonida/issues/3796#issuecomment-7086691314
+          # job, wrong on MoltenVK: https://github.com/synrgizeross/leonida-sys/issues/3796#issuecomment-7086691314
           EXPECTED_FAILURES: >-
             ps_ssharp
             cs_fma_fused

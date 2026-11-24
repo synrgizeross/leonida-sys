@@ -342,7 +342,7 @@ call: one `D3D12_BARRIER_GROUP` of type `D3D12_BARRIER_TYPE_GLOBAL` (0) holding 
 across seven functions. It counted 11 direct calls through the vtable entry and 18 calls through a register
 loaded from that entry. All 29 passed one global barrier group containing one `D3D12_GLOBAL_BARRIER` with
 the same compute-shading and unordered-access arguments described above. The counts cover the two
-enumerated dispatch forms in the builder's `.text`. [Static corroboration and coverage details](https://github.com/ItsNotRexed/Leonida/issues/1626)
+enumerated dispatch forms in the builder's `.text`. [Static corroboration and coverage details](https://github.com/synrgizeross/leonida-sys/issues/1626)
 
 The same two inner functions (`0x1d540` and `0x1d7c0`) contain the `+0x70`, `+0xc8`, `+0x108`,
 `+0x138`, `+0x168` and `+0x490` calls; the outer batched function contains the `+0xd0` barrier.

@@ -57,7 +57,7 @@ Proje henüz erken aşamadadır: **oyun şu an açılmıyor**.
 1. Yukarıdaki gereksinimleri kurun.
 2. Depoyu **alt modülüyle birlikte** klonlayın:
    ```powershell
-   git clone --recursive https://github.com/ItsNotRexed/Leonida
+   git clone --recursive https://github.com/synrgizeross/leonida-sys
    ```
 3. **`Build.bat`** dosyasına çift tıklayın.
 
@@ -119,7 +119,7 @@ Aşamalar şu sırayla çalışır: `check` → `shaders` → `assets` → `runt
    [`CONTRIBUTING.md`](../../../CONTRIBUTING.md) dosyasına bakın.
 
 [GPU test rehberi](../../testing.md), oyun dosyası olmadan testlerin nasıl çalıştırılacağını açıklar. GPU test
-sonuçlarını [issue #166](https://github.com/ItsNotRexed/Leonida/issues/166) altında (GPU ve sürücü başına bir yorum)
+sonuçlarını [issue #166](https://github.com/synrgizeross/leonida-sys/issues/166) altında (GPU ve sürücü başına bir yorum)
 paylaşabilirsiniz.
 
-[coord]: https://github.com/ItsNotRexed/Leonida/issues?q=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22Coordinating%20who%20works%20on%20what%22
+[coord]: https://github.com/synrgizeross/leonida-sys/issues?q=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22Coordinating%20who%20works%20on%20what%22

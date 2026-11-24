@@ -63,7 +63,7 @@ El proyecto está en una fase inicial: **el juego todavía no arranca**.
 1. Instale los requisitos anteriores.
 2. Clone el repositorio **con su submódulo**:
    ```powershell
-   git clone --recursive https://github.com/ItsNotRexed/Leonida
+   git clone --recursive https://github.com/synrgizeross/leonida-sys
    ```
 3. Haga doble clic en **`Build.bat`**.
 
@@ -124,7 +124,7 @@ esa capacidad en compute.
 
 Con el controlador de AMD para Windows, `auto` usa wave64 nativo en RDNA1 y RDNA2 si la GPU del runtime lo admite,
 aunque otra GPU use subgrupos de 32 o no esté disponible `vulkaninfo`. Así evita un fallo del controlador con
-código LDS emulado ([#857](https://github.com/ItsNotRexed/Leonida/issues/857)). En RDNA1 sin mesh nativo comprueba
+código LDS emulado ([#857](https://github.com/synrgizeross/leonida-sys/issues/857)). En RDNA1 sin mesh nativo comprueba
 la capacidad de compute. Puede forzar la emulación con `--wave64-emulate on` o el modo nativo con
 `--wave64-emulate off`.
 
@@ -220,7 +220,7 @@ descomprimido. Así evita compilar el runtime; la misma opción funciona en Wind
    [`CONTRIBUTING.md`](../../../CONTRIBUTING.md).
 
 La [guía de pruebas de GPU](../../testing.md) explica cómo ejecutarlas sin ningún archivo del juego. Publique sus
-resultados en la [issue #166](https://github.com/ItsNotRexed/Leonida/issues/166), un comentario por GPU y por
+resultados en la [issue #166](https://github.com/synrgizeross/leonida-sys/issues/166), un comentario por GPU y por
 controlador.
 
-[coord]: https://github.com/ItsNotRexed/Leonida/issues?q=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22Coordinating%20who%20works%20on%20what%22
+[coord]: https://github.com/synrgizeross/leonida-sys/issues?q=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22Coordinating%20who%20works%20on%20what%22

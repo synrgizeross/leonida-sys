@@ -26,7 +26,7 @@ measured natively on AMD GPUs (SHADER-116). The translator reads this field and 
   not a multiple of 4 (stride 18 with `index > 0`) is rounded by the hardware; where such an access lands was not
   part of this measurement.
 - @AlxcBTW measured RDNA3.5 (Radeon 880M, gfx1150) through the HIP runtime and found it matches the GFX11 column
-  ([finding](https://github.com/ItsNotRexed/Leonida/issues/374#issuecomment-7072793165)). The RDNA2 result here
+  ([finding](https://github.com/synrgizeross/leonida-sys/issues/374#issuecomment-7072793165)). The RDNA2 result here
   agrees with it, plus the `soffset` rule.
 
 **RDNA1 measurement (SHADER-341):** the console target is gfx1013 (GFX10.1); gfx1036 is GFX10.3, and the

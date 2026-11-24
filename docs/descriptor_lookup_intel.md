@@ -3,8 +3,8 @@
 @kapitche ran the D3D-56 `vk_descriptor_bench` synthetic compute benchmark on an Intel
 UHD Graphics 770 (Xe-LP integrated GPU) under Windows 11 with Intel driver `101.6129`.
 Vulkan reported a subgroup size of 32 and a timestamp period of 52.083 ns. The run used
-`main` at [`8df277f`](https://github.com/ItsNotRexed/Leonida/commit/8df277fb035b384971497f6f9790f7fc4b9ec1d1).
-[Original report by @kapitche](https://github.com/ItsNotRexed/Leonida/issues/313#issuecomment-7073751039)
+`main` at [`8df277f`](https://github.com/synrgizeross/leonida-sys/commit/8df277fb035b384971497f6f9790f7fc4b9ec1d1).
+[Original report by @kapitche](https://github.com/synrgizeross/leonida-sys/issues/313#issuecomment-7073751039)
 
 ## Measurements
 

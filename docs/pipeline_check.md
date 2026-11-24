@@ -239,7 +239,7 @@ acceptance only.
 
 ## Limiting concurrent compilation of large modules
 
-A SPIR-V module larger than 4 MiB is "large". [#884](https://github.com/ItsNotRexed/Leonida/issues/884)
+A SPIR-V module larger than 4 MiB is "large". [#884](https://github.com/synrgizeross/leonida-sys/issues/884)
 showed why that matters: several compiles that each needed gigabytes of host RAM ran at the same time. Large
 modules now share a memory budget (`runtime/test/large_module_gate.h`): each one reserves 512 bytes of RAM per
 SPIR-V byte, and they enter the driver while their reservations fit three quarters of the memory available when
@@ -366,7 +366,7 @@ game files or GPU.
 ## Crash isolation (`--isolate`)
 
 A driver that dies while compiling one module (for example the RADV `SIGFPE` in
-[#1721](https://github.com/ItsNotRexed/Leonida/issues/1721)) ends the whole process, so the rest of the corpus
+[#1721](https://github.com/synrgizeross/leonida-sys/issues/1721)) ends the whole process, so the rest of the corpus
 used to need that module excluded by hand with `--start/--count`. With `--isolate` the tool runs the check in
 child processes on native Windows and POSIX:
 
@@ -447,7 +447,7 @@ retries when needed (above).
 Each process seeds from and saves to the same cache file, so the chunks resume. Since #903 the checker also
 compiles modules over 4 MiB alone.
 
-For BUILD-1030, [the reporter's later measurements](https://github.com/ItsNotRexed/Leonida/pull/3623#issuecomment-7085912874)
+For BUILD-1030, [the reporter's later measurements](https://github.com/synrgizeross/leonida-sys/pull/3623#issuecomment-7085912874)
 found no accumulation over a 1,500-entry range and cheap loading of the full cache; the large peaks came from
 individual heavy modules. The recovery therefore splits the failed range until fewer such modules compile at
 once, without treating the initial cache-growth hypothesis as established.

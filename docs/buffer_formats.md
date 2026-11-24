@@ -10,7 +10,7 @@ What `buffer_load_format_*`, `buffer_store_format_*` and `tbuffer_load_format_*`
 (8_8_8_8_UNORM is 56 on GFX10 and 42 on GFX11), so every format there is mapped by name (`GFX11_CODES` in the tool, taken from
 what the AMD assembler encodes for `format:[BUF_FMT_<name>]`). @AwkGrep256 then ran the same tool on a real **RDNA2, gfx1036**
 (Ryzen 7 9800X3D iGPU, Linux DRM backend of #1265, native GFX10 numbers; see the comment on
-[#2022](https://github.com/ItsNotRexed/Leonida/pull/2022)): 1,330,469 elements of the 63 formats GFX11 has with 0 mismatches,
+[#2022](https://github.com/synrgizeross/leonida-sys/pull/2022)): 1,330,469 elements of the 63 formats GFX11 has with 0 mismatches,
 and 199,144 elements of the 14 codes only GFX10 has with 0 mismatches. The 880M and gfx1036 agree on everything below. The
 console's own gfx1013 (GFX10.1) is the same generation but not the same chip, and was not measured; nor were the d16 forms.
 

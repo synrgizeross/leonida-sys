@@ -1,6 +1,6 @@
 # SGD5 pass render-state indices
 
-In the Xbox 1.0.2.1 shader archive, bytes 6, 7 and 8 of a 24-byte pass select rows in the effect's rasterizer, depth/stencil and blend tables. These byte positions and state indices are zero-based. The six bytes immediately before them use one-based shader program selectors, with zero meaning unused. A renderer looking up a stored pass can therefore identify the three explicit state records alongside its shader programs. [Program lookup and effect boundaries](https://github.com/ItsNotRexed/Leonida/pull/2519)
+In the Xbox 1.0.2.1 shader archive, bytes 6, 7 and 8 of a 24-byte pass select rows in the effect's rasterizer, depth/stencil and blend tables. These byte positions and state indices are zero-based. The six bytes immediately before them use one-based shader program selectors, with zero meaning unused. A renderer looking up a stored pass can therefore identify the three explicit state records alongside its shader programs. [Program lookup and effect boundaries](https://github.com/synrgizeross/leonida-sys/pull/2519)
 
 | Pass byte | Effect-local table | Bytes per row | Stored rows across both databases | Effects with passes and at least two rows | Effects in which the pass byte selects every row |
 |---:|---|---:|---:|---:|---:|
@@ -12,7 +12,7 @@ All **28,798 passes** in the two databases satisfy the same rule. For a nonempty
 
 ## Reproduce on a local package
 
-Use the `shaders.rpf` listed in the [Xbox 1.0.2.1 manifest](../game/xbox-1.0.2.1.json). The two SGD5 databases start at `0x9000` and `0x10287000`. They contain 910 and 22 effects. Use each effect's own six program lists and its own state tables. [Named-pass reader and package test](https://github.com/ItsNotRexed/Leonida/pull/3036)
+Use the `shaders.rpf` listed in the [Xbox 1.0.2.1 manifest](../game/xbox-1.0.2.1.json). The two SGD5 databases start at `0x9000` and `0x10287000`. They contain 910 and 22 effects. Use each effect's own six program lists and its own state tables. [Named-pass reader and package test](https://github.com/synrgizeross/leonida-sys/pull/3036)
 
 1. From the end of the six program ordinal arrays, skip 80 bytes. For each row width in `(16, 24, 68, 36)`, read one little-endian u32 count, record the offset of the first row, and advance by `count * width`. The fourth table is needed to locate the techniques.
 2. Read the u32 technique count and skip four bytes per technique. The next u32 is the pass count. For every 24-byte pass, check offsets 6, 7 and 8 against counts 0, 1 and 2 respectively. For a nonempty table the selected row starts at `first_row + pass_byte * width`.

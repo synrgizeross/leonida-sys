@@ -81,7 +81,7 @@ The video path (`Bink2Scarlett.dll`), the BVH builder and the FidelityFX upscale
 two shim DLLs that already exist. `libHttpClient.GDK.dll` and `XCurl.dll` import only desktop APIs.
 
 `xmem.dll!XMemTransferMemory` is not imported by any of these DLLs, but a Series executable calls it during startup
-(reported in [#5934](https://github.com/ItsNotRexed/Leonida/issues/5934#issuecomment-7101779516)). Its GDK reference
+(reported in [#5934](https://github.com/synrgizeross/leonida-sys/issues/5934#issuecomment-7101779516)). Its GDK reference
 page is an NDA topic, but Microsoft's public [NetRumble](https://github.com/microsoft/XBOX-MonoGame-NetRumble/blob/203255e785f2ab2671a9d83b724eaa14d5b07414/console/NetRumble.Bootstrap/Main.cpp#L135-L145)
 sample and FNA's [NativeAOT-Xbox](https://github.com/FNA-XNA/NativeAOT-Xbox/blob/b9dc547afd0e05f45764d670ec49e0ac7997a301/Bootstrap/Main.cpp#L117-L124)
 bootstrap call it as `if (!XMemTransferMemory(XMemTransferTitleToSystem, size))` with a `size_t` in multiples of

@@ -256,7 +256,7 @@ pairs, semantic 21 as weights): semantic 21 is always index-typed, and the weigh
 bytes of semantics 16/17. The earlier "16 bytes that do not form `(bone, weight)` pairs" note was
 the packed index layout above. [An independent measurement of the same layouts, over rpf9-explorer
 recovery with the bone-palette pull requests applied, was posted in
-#634](https://github.com/ItsNotRexed/Leonida/issues/634#issuecomment-7074504326); the counts there
+#634](https://github.com/synrgizeross/leonida-sys/issues/634#issuecomment-7074504326); the counts there
 are higher because that recovery also walks nested archives.
 
 ## Animated glTF export

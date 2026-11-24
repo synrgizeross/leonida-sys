@@ -151,7 +151,7 @@ the four maps on the same two shaders (`210FBC6A`, `8D69EDAB`); for the two exam
 | feet (`feet_fr1_000_*`) | `0xA54D9F8B51CA6034` — none | `0x752EA8A7A086558F` — none | `0x5091E86DE6196BC3` — `ttdb_peds_3_3`, 512×1024 BC7 | `0xD5C8D2A180326DE7` — none |
 
 Each material has ten slots; the other six bind `0x5D7A3A87CC19967D` on both shaders, with no
-exact pool hit. The [independent indexed-record check](https://github.com/ItsNotRexed/Leonida/pull/3256#pullrequestreview-6014627459)
+exact pool hit. The [independent indexed-record check](https://github.com/synrgizeross/leonida-sys/pull/3256#pullrequestreview-6014627459)
 found this same reference in all 176 material
 rows, including the 12 positive-control rows whose four named maps all resolve. An engine-supplied
 default is a hypothesis: the repeated unresolved reference alone does not establish its runtime use.

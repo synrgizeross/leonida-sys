@@ -18,11 +18,11 @@ requests, post `claiming: <ID>` there (or a one-line description for something n
 your pull request. Found something that needs doing but won't do it yourself? Post `finding: <one line>` there, with
 where it is and why it matters, and it goes on the list for others. When two pull requests overlap anyway, the one
 that lands first is merged and the other is asked to rebase or close. GPU test results go in
-[#166](https://github.com/ItsNotRexed/Leonida/issues/166). Work on the D3D12 → Vulkan layer has its own page,
-[#313](https://github.com/ItsNotRexed/Leonida/issues/313): the critical path, who builds what, and which D3D12
+[#166](https://github.com/synrgizeross/leonida-sys/issues/166). Work on the D3D12 → Vulkan layer has its own page,
+[#313](https://github.com/synrgizeross/leonida-sys/issues/313): the critical path, who builds what, and which D3D12
 methods are still open.
 
-[claims]: https://github.com/ItsNotRexed/Leonida/issues?q=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22Coordinating%20who%20works%20on%20what%22
+[claims]: https://github.com/synrgizeross/leonida-sys/issues?q=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22Coordinating%20who%20works%20on%20what%22
 
 ## Working on the code
 
