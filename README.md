@@ -20,7 +20,8 @@
   <a href="#want-to-help">Want to help?</a> |
   <a href="#credits">Credits</a> |
   <a href="#license">License</a> |
-  <a href="https://discord.gg/leonida">Discord</a>
+  <a href="https://discord.gg/leonida">Discord</a> |
+  <a href="https://playgtaonpc.com/">Website — play GTA 6 on PC</a>
 </p>
 
 Leonida is a static recompilation project. The Xbox Series CPU is x86-64 like a PC, so the game's code is loaded
